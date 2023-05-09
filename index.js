@@ -28,7 +28,7 @@ app.post("/", async (req, res) => {
       content,
       thumb_media_id: media_id,
     };
-    createDraft(params);
+    await createDraft(params);
   } catch (error) {}
   res.send("success");
 });
