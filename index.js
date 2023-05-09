@@ -1,12 +1,36 @@
 const express = require("express");
+const createDraft = require("./utils/createDraft");
+const getJson = require("./utils/getJson");
+const uploadFmImg = require("./utils/uploadFmImg");
+const getWxCodeToken = require("./utils/getWxCodeToken");
+
+async function init() {
+  // 获取json
+  getJson();
+  // 获取token
+  await getWxCodeToken();
+}
+init();
 
 const app = express();
 
 app.use(express.json());
-
 app.post("/", async (req, res) => {
-  console.log("消息推送", req.body);
-  res.send("success"); // 不进行任何回复，直接返回success，告知微信服务器已经正常收到。
+  console.log("消息推送", req.body.Content);
+  try {
+    const data = req.body.Content;
+    const title = data.split("/")[0];
+    const content = data.split("/")[1];
+    // 获取封面图片
+    const media_id = await uploadFmImg();
+    createDraft({
+      title,
+      author: "远程程序员",
+      content,
+      thumb_media_id: media_id,
+    });
+  } catch (error) {}
+  res.send("success");
 });
 
 app.listen(80, function () {

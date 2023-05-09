@@ -3,11 +3,16 @@
     "version": "1.0.0",
     "description": "call push server",
     "main": "index.js",
-    "scripts": {},
+    "scripts": {
+        "start": "nodemon index.js"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "express": "^4.16.4"
+        "axios": "^1.4.0",
+        "express": "^4.18.2",
+        "form-data": "^4.0.0",
+        "node-localstorage": "^2.2.1",
+        "nodemon": "^2.0.22"
     }
-  }
-  
+}
