@@ -22,7 +22,7 @@ app.post("/", async (req, res) => {
     const title = data.split("/")[0];
     const content = data.split("/")[1];
     console.log(111222, title, content);
-    // const media_id = await uploadFmImg(); // 获取封面图片
+    const media_id = await uploadFmImg(); // 获取封面图片
     console.log(222, media_id);
     const params = {
       title,
