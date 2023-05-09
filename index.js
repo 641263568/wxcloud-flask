@@ -22,13 +22,13 @@ app.post("/", async (req, res) => {
     const title = data.split("/")[0];
     const content = data.split("/")[1];
     console.log(111, title, content);
-    const media_id = await uploadFmImg(); // 获取封面图片
+    // const media_id = await uploadFmImg(); // 获取封面图片
     console.log(222, media_id);
     const params = {
       title,
       author: "远程程序员",
       content,
-      thumb_media_id: media_id,
+      thumb_media_id: "media_id",
     };
     console.log(333, params);
     await createDraft(params);

@@ -10,7 +10,7 @@ const localStorage = new LocalStorage("./scratch");
 const pipeline = util.promisify(stream.pipeline);
 const imagePath = "image.jpg";
 
-async function downloadImage() {
+async function download() {
   const url = "https://source.unsplash.com/random/900x383?wallpaper";
   const response = await axios({
     url,
@@ -21,7 +21,7 @@ async function downloadImage() {
   await pipeline(response.data, writer);
 }
 
-async function uploadImage() {
+async function upload() {
   console.log(4444);
 
   const url = "https://api.weixin.qq.com/cgi-bin/material/add_material";
@@ -43,8 +43,8 @@ async function uploadImage() {
 }
 
 async function uploadFmImg() {
-  await downloadImage();
-  const { media_id } = await uploadImage();
+  await download();
+  const { media_id } = await upload();
   return media_id;
 }
 
