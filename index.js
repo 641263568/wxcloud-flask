@@ -4,18 +4,21 @@ const getJson = require("./utils/getJson");
 const uploadFmImg = require("./utils/uploadFmImg");
 const getWxCodeToken = require("./utils/getWxCodeToken");
 
+let media_id = "";
 async function init() {
   // 获取json
   getJson();
   // 获取token
   await getWxCodeToken();
+  media_id = await uploadFmImg(); // 获取封面图片
+  console.log(9999, media_id);
 }
-init();
 
 const app = express();
 
 app.use(express.json());
 app.post("/", async (req, res) => {
+  await init();
   console.log("消息推送", req.body.Content);
   try {
     const data = req.body.Content;
