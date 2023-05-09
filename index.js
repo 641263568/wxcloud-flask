@@ -20,6 +20,8 @@ app.post("/", async (req, res) => {
   try {
     const data = req.body.Content;
     const title = data.split("/")[0];
+    console.log(111, title);
+
     const content = data.split("/")[1];
     const media_id = await uploadFmImg(); // 获取封面图片
     const params = {
@@ -28,8 +30,11 @@ app.post("/", async (req, res) => {
       content,
       thumb_media_id: media_id,
     };
+    console.log(222, params);
     await createDraft(params);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   res.send("success");
 });
 
