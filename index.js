@@ -21,14 +21,14 @@ app.post("/", async (req, res) => {
     const data = req.body.Content;
     const title = data.split("/")[0];
     const content = data.split("/")[1];
-    // 获取封面图片
-    const media_id = await uploadFmImg();
-    createDraft({
+    const media_id = await uploadFmImg(); // 获取封面图片
+    const params = {
       title,
       author: "远程程序员",
       content,
       thumb_media_id: media_id,
-    });
+    };
+    createDraft(params);
   } catch (error) {}
   res.send("success");
 });
