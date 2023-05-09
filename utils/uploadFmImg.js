@@ -17,12 +17,13 @@ async function downloadImage() {
     method: "GET",
     responseType: "stream",
   });
-
   const writer = fs.createWriteStream(imagePath);
   await pipeline(response.data, writer);
 }
 
 async function uploadImage() {
+  console.log(4444);
+
   const url = "https://api.weixin.qq.com/cgi-bin/material/add_material";
   const access_token = localStorage.getItem("access_token");
   const formData = new FormData();
@@ -37,7 +38,7 @@ async function uploadImage() {
   if (response.data.errcode) {
     throw new Error(`WeChat API error: ${response.data.errmsg}`);
   }
-
+  console.log(5555, response.data);
   return response.data;
 }
 
