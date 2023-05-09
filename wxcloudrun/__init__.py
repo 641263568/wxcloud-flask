@@ -1,24 +1,22 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-import pymysql
-import config
+from flask import Flask, request, abort
+import xml.etree.ElementTree as ET
 
-# 因MySQLDB不支持Python3，使用pymysql扩展库代替MySQLDB库
-pymysql.install_as_MySQLdb()
+app = Flask(__name__)
 
-# 初始化web应用
-app = Flask(__name__, instance_relative_config=True)
-app.config['DEBUG'] = config.DEBUG
+print(123123123)
+@app.route('/your_predefined_url', methods=['POST'])
+def wechat():
+    if request.method == 'POST':
+        xml_str = request.data
+        if not xml_str:
+            abort(400)
+        xml = ET.fromstring(xml_str)
+        toUserName = xml.find("ToUserName").text
+        fromUserName = xml.find("FromUserName").text
+        createTime = xml.find("CreateTime").text
+        msgType = xml.find("MsgType").text
+        content = xml.find("Content").text
+        msgId = xml.find("MsgId").text
+        print(f"Received message: {content} from: {fromUserName}")
+        return "success", 200
 
-# 设定数据库链接
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}/flask_demo'.format(config.username, config.password,
-                                                                             config.db_address)
-
-# 初始化DB操作对象
-db = SQLAlchemy(app)
-
-# 加载控制器
-from wxcloudrun import views
-
-# 加载配置
-app.config.from_object('config')
