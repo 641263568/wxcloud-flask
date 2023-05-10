@@ -31,7 +31,7 @@ app.post("/", async (req, res) => {
       title,
       author: "远程程序员",
       content,
-      thumb_media_id: "media_id",
+      thumb_media_id: media_id,
     };
     console.log(333, params);
     await createDraft(params);
