@@ -4,8 +4,8 @@ const fs = require("fs");
 const FormData = require("form-data");
 const stream = require("stream");
 const util = require("util");
-const LocalStorage = require("node-localstorage").LocalStorage;
-const localStorage = new LocalStorage("./scratch");
+// const LocalStorage = require("node-localstorage").LocalStorage;
+// const localStorage = new LocalStorage("./scratch");
 
 const pipeline = util.promisify(stream.pipeline);
 const imagePath = "image.jpg";
@@ -25,21 +25,26 @@ async function upload() {
   console.log(4444);
 
   const url = "https://api.weixin.qq.com/cgi-bin/material/add_material";
-  // const access_token = localStorage.getItem("access_token");
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
-  // formData.append("access_token", access_token);
   formData.append("type", "image");
 
-  const response = await axios.post(url, formData, {
-    headers: formData.getHeaders(),
-  });
+  try {
+    const response = await axios.post(url, formData, {
+      headers: formData.getHeaders(),
+    });
 
-  if (response.data.errcode) {
-    throw new Error(`WeChat API error: ${response.data.errmsg}`);
+    if (response.data.errcode) {
+      throw new Error(`WeChat API error: ${response.data.errmsg}`);
+    }
+
+    console.log(5555, response.data);
+    return response.data;
+  } catch (error) {
+    // Handle the error
+    console.error("Error in upload():", error);
+    throw error; // Re-throw the error to propagate it to the caller
   }
-  console.log(5555, response.data);
-  return response.data;
 }
 
 async function uploadFmImg() {
