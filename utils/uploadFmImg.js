@@ -8,6 +8,7 @@ const LocalStorage = require("node-localstorage").LocalStorage;
 const localStorage = new LocalStorage("./scratch");
 
 const access_token = localStorage.getItem("access_token");
+
 const pipeline = util.promisify(stream.pipeline);
 const imagePath = "image.jpg";
 
