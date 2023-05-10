@@ -7,9 +7,9 @@ const getWxCodeToken = require("./utils/getWxCodeToken");
 let media_id = "";
 async function init() {
   // 获取json
-  //   getJson();
+  getJson();
   // 获取token
-  //   await getWxCodeToken();
+  await getWxCodeToken();
   media_id = await uploadFmImg(); // 获取封面图片
   console.log(9999, media_id);
 }

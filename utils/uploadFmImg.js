@@ -27,6 +27,7 @@ async function upload() {
   const url = "https://api.weixin.qq.com/cgi-bin/material/add_material";
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
+  formData.append("access_token", access_token);
   formData.append("type", "image");
 
   try {
