@@ -2,8 +2,9 @@ const axios = require("axios");
 async function createDraft(articles) {
   console.log(999999);
   const url = `http://api.weixin.qq.com/cgi-bin/draft/add`;
-  data = [articles];
-  const response = await axios.post(url, data);
+  const response = await axios.post(url, {
+    articles: [articles],
+  });
   console.log(response.data);
   console.log(1111);
   console.log(response);
