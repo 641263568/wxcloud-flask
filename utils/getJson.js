@@ -8,7 +8,7 @@ const jsonFilePath = path.join(__dirname, "../data.json");
 
 function getjson() {
   // 读取 JSON 文件
-  fs.readFile(jsonFilePath, "utf-8", (err, data) => {
+  fs.readFileSync(jsonFilePath, "utf-8", (err, data) => {
     if (err) {
       console.error("An error occurred:", err);
       return;
