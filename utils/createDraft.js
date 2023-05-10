@@ -1,13 +1,9 @@
 const axios = require("axios");
 async function createDraft(articles) {
-  console.log(999999);
   const url = `http://api.weixin.qq.com/cgi-bin/draft/add`;
   const response = await axios.post(url, {
-    articles: [articles],
+    articles,
   });
-  console.log(response.data);
-  console.log(1111);
-  console.log(response);
   if (response.data.errcode) {
     console.error(`Failed to create draft: ${response.data.errmsg}`);
   } else {

@@ -24,8 +24,6 @@ async function download() {
 }
 
 async function upload() {
-  console.log(4444);
-
   const url = "http://api.weixin.qq.com/cgi-bin/material/add_material";
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
@@ -40,8 +38,6 @@ async function upload() {
     if (response.data.errcode) {
       throw new Error(`WeChat API error: ${response.data.errmsg}`);
     }
-
-    console.log(5555, response.data);
     return response.data;
   } catch (error) {
     // Handle the error

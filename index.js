@@ -11,7 +11,6 @@ async function init() {
   // 获取token
   await getWxCodeToken();
   media_id = await uploadFmImg(); // 获取封面图片
-  console.log(9999, media_id);
 }
 
 const app = express();
@@ -24,16 +23,15 @@ app.post("/", async (req, res) => {
     const data = req.body.Content;
     const title = data.split("/")[0];
     const content = data.split("/")[1];
-    console.log(111222, title, content);
     const media_id = await uploadFmImg(); // 获取封面图片
-    console.log(222, media_id);
-    const params = {
-      title,
-      author: "远程程序员",
-      content,
-      thumb_media_id: media_id,
-    };
-    console.log(333, params);
+    const params = [
+      {
+        title,
+        author: "远程程序员",
+        content,
+        thumb_media_id: media_id,
+      },
+    ];
     await createDraft(params);
   } catch (error) {
     console.log(error);

@@ -12,8 +12,6 @@ async function getWxCodeToken() {
       appid, // 请替换为你的 appid
       secret, // 请替换为你的 secret
     };
-    console.log("获取access_token");
-    console.log(params);
     const res = await axios.get("http://api.weixin.qq.com/cgi-bin/token", {
       params,
       headers: {
@@ -23,7 +21,6 @@ async function getWxCodeToken() {
     });
 
     const access_token = res.data.access_token;
-
     console.log("获取access_token成功");
     localStorage.setItem("access_token", access_token);
     return access_token;
