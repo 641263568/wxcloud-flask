@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.post("/", async (req, res) => {
   await init();
-  console.log("消息推送", req.body.Content);
+  console.log("消息推送 ", req.body.Content);
   try {
     const data = req.body.Content;
     const title = data.split("666666")[0]?.trim();
