@@ -14,7 +14,7 @@ async function getWxCodeToken() {
     };
     console.log("获取access_token");
     console.log(params);
-    const res = await axios.get("https://api.weixin.qq.com/cgi-bin/token", {
+    const res = await axios.get("http://api.weixin.qq.com/cgi-bin/token", {
       params,
       headers: {
         "User-Agent":
