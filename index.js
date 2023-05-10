@@ -4,13 +4,11 @@ const getJson = require("./utils/getJson");
 const uploadFmImg = require("./utils/uploadFmImg");
 const getWxCodeToken = require("./utils/getWxCodeToken");
 
-let media_id = "";
 async function init() {
   // 获取json
   getJson();
   // 获取token
   await getWxCodeToken();
-  media_id = await uploadFmImg(); // 获取封面图片
 }
 
 const app = express();
@@ -21,18 +19,22 @@ app.post("/", async (req, res) => {
   console.log("消息推送", req.body.Content);
   try {
     const data = req.body.Content;
-    const title = data.split("/")[0];
-    const content = data.split("/")[1];
-    const media_id = await uploadFmImg(); // 获取封面图片
-    const params = [
-      {
-        title,
-        author: "远程程序员",
-        content,
-        thumb_media_id: media_id,
-      },
-    ];
-    await createDraft(params);
+    const title = data.split("666666")[0]?.trim();
+    const contact = "联系微信：1911516114";
+    const content = data.split("666666")[1]?.trim() + contact;
+    if (title && content) {
+      console.log("开始推送");
+      const media_id = await uploadFmImg(); // 获取封面图片
+      const params = [
+        {
+          title,
+          author: "远程程序员",
+          content,
+          thumb_media_id: media_id,
+        },
+      ];
+      await createDraft(params);
+    }
   } catch (error) {
     console.log(error);
   }
