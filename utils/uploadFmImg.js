@@ -24,7 +24,7 @@ async function download() {
 async function upload() {
   console.log(4444);
 
-  const url = "https://api.weixin.qq.com/cgi-bin/material/add_material";
+  const url = "http://api.weixin.qq.com/cgi-bin/material/add_material";
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
   formData.append("access_token", access_token);
