@@ -7,7 +7,7 @@ async function createDraft(articles) {
   if (response.data.errcode) {
     console.error(`Failed to create draft: ${response.data.errmsg}`);
   } else {
-    console.log(`Draft created: ${response.data.media_id}`);
+    console.log(`草稿推送成功: ${response.data.media_id}`);
   }
 }
 
