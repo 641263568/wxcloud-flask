@@ -25,10 +25,10 @@ async function upload() {
   console.log(4444);
 
   const url = "https://api.weixin.qq.com/cgi-bin/material/add_material";
-  const access_token = localStorage.getItem("access_token");
+  // const access_token = localStorage.getItem("access_token");
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
-  formData.append("access_token", access_token);
+  // formData.append("access_token", access_token);
   formData.append("type", "image");
 
   const response = await axios.post(url, formData, {
