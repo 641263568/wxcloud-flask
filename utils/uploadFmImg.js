@@ -5,22 +5,25 @@ const fs = require("fs");
 const FormData = require("form-data");
 const stream = require("stream");
 const util = require("util");
-const LocalStorage = require("node-localstorage").LocalStorage;
-const localStorage = new LocalStorage("./scratch");
-
-const access_token = localStorage.getItem("access_token");
 
 const pipeline = util.promisify(stream.pipeline);
 const imagePath = "image.jpg";
 
 async function download() {
-  const url = "https://source.unsplash.com/random/900x383?wallpaper";
-  const response = await axios({
-    url,
-    method: "GET",
-    responseType: "stream",
-  });
-  const writer = fs.createWriteStream(imagePath);
+  const url = "http://source.unsplash.com/random/900x383?wallpaper";
+  try {
+    const response = await axios({
+      url,
+      method: "GET",
+      responseType: "stream",
+      timeout: 6000,
+    });
+    const writer = fs.createWriteStream(imagePath);
+  } catch (error) {
+    console.error("Error in download():", error);
+    throw error; // Re-throw the error to propagate it to the caller
+  }
+
   await pipeline(response.data, writer);
 }
 
