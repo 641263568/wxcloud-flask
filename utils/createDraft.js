@@ -4,6 +4,7 @@ const localStorage = new LocalStorage("./scratch");
 const access_token = localStorage.getItem("access_token");
 
 async function createDraft(articles) {
+  console.log("草稿token：", access_token);
   const url = `http://api.weixin.qq.com/cgi-bin/draft/add?access_token=${access_token}`;
   try {
     const res = await axios.post(url, {

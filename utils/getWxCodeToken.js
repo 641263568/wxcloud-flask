@@ -21,7 +21,7 @@ async function getWxCodeToken() {
     });
 
     const access_token = res.data.access_token;
-    console.log("获取access_token成功");
+    console.log("获取access_token成功", access_token);
     localStorage.setItem("access_token", access_token);
     return access_token;
   } catch (err) {
