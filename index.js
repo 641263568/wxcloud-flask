@@ -5,7 +5,7 @@ const uploadFmImg = require("./utils/uploadFmImg");
 const getWxCodeToken = require("./utils/getWxCodeToken");
 
 async function init() {
-  // 获取json
+  // 获取 json
   getJson();
   // 获取token
   await getWxCodeToken();
