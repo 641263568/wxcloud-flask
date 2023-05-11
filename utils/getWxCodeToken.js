@@ -7,6 +7,20 @@ const secret = localStorage.getItem("secret");
 
 async function getWxCodeToken() {
   try {
+    let appid, secret;
+    // 读取appid和secret
+    try {
+      const data = fs.readFileSync(jsonFilePath, "utf-8");
+      // 解析 JSON 文件内容
+      ({ appid, secret } = JSON.parse(data));
+    } catch (err) {
+      console.error("读取appid失败:", err);
+      return;
+    }
+    if (!appid || !secret) {
+      console.error("appid或secret不存在");
+      return;
+    }
     const params = {
       grant_type: "client_credential",
       appid, // 请替换为你的 appid
