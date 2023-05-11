@@ -19,9 +19,9 @@ app.post("/", async (req, res) => {
   console.log("消息推送 ", req.body.Content);
   try {
     const data = req.body.Content;
-    const title = data.split("666666")[0]?.trim();
+    const title = data.split("666666")?.[0]?.trim();
     const contact = "联系微信：1911516114";
-    const content = data.split("666666")[1]?.trim() + contact;
+    const content = data.split("666666")?.[1]?.trim() + contact;
     if (title && content) {
       console.log("开始推送");
       const media_id = await uploadFmImg(); // 获取封面图片
