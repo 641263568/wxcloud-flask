@@ -47,7 +47,7 @@ async function upload() {
 }
 
 async function uploadFmImg() {
-  await download();
+  // await download();
   const { media_id } = await upload();
   return media_id;
 }
