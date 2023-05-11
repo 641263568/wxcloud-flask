@@ -2,16 +2,32 @@ const express = require("express");
 const wxapi = require("../work/wxapi");
 const router = express.Router();
 
-const articles = [
-  {
-    title,
-    author: "远程程序员",
-    content,
-    thumb_media_id: media_id,
-  },
-];
+async function uploadImg() {
+  const url = "http://api.weixin.qq.com/cgi-bin/material/add_material";
+  const formData = new FormData();
+  formData.append("media", fs.createReadStream(imagePath));
+  formData.append("type", "image");
+
+  try {
+    const response = await wxapi.call(url, formData);
+    console.log("上传图片成功:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("上传图片失败:", error);
+  }
+}
+
 async function createDraft() {
   const url = `http://api.weixin.qq.com/cgi-bin/draft/add`;
+  const { media_id } = await uploadImg();
+  const articles = [
+    {
+      title,
+      author: "远程程序员",
+      content,
+      thumb_media_id: media_id,
+    },
+  ];
   try {
     await wxapi.call(url, {
       articles,
