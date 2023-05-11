@@ -5,7 +5,7 @@ async function createDraft(articles) {
     await axios.post(url, {
       articles,
     });
-    console.success("消息推送成功");
+    console.log("消息推送成功");
   } catch (error) {
     console.error("Error in createDraft():", error);
     throw error;
