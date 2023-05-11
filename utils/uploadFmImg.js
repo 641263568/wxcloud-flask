@@ -19,12 +19,11 @@ async function download() {
       timeout: 6000,
     });
     const writer = fs.createWriteStream(imagePath);
+    await pipeline(response.data, writer);
   } catch (error) {
     console.error("Error in download():", error);
     throw error; // Re-throw the error to propagate it to the caller
   }
-
-  await pipeline(response.data, writer);
 }
 
 async function upload() {
