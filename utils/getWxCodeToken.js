@@ -1,9 +1,7 @@
 const axios = require("axios");
+const fs = require("fs");
 const LocalStorage = require("node-localstorage").LocalStorage;
 const localStorage = new LocalStorage("./scratch");
-
-const appid = localStorage.getItem("appid");
-const secret = localStorage.getItem("secret");
 
 async function getWxCodeToken() {
   try {
@@ -21,6 +19,7 @@ async function getWxCodeToken() {
       console.error("appid或secret不存在");
       return;
     }
+    // 获取access_token
     const params = {
       grant_type: "client_credential",
       appid, // 请替换为你的 appid
