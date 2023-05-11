@@ -11,5 +11,6 @@ module.exports = {
   extends: ["eslint:recommended"],
   rules: {
     // 在这里添加自定义的规则
+    "no-undef": "error",
   },
 };

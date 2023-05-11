@@ -1,9 +1,11 @@
 const axios = require("axios");
 const fs = require("fs");
+const path = require("path");
 const LocalStorage = require("node-localstorage").LocalStorage;
 const localStorage = new LocalStorage("./scratch");
 
 async function getWxCodeToken() {
+  console.log(ew);
   try {
     let appid, secret;
     // 读取appid和secret

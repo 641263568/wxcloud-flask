@@ -4,6 +4,7 @@ const fs = require("fs");
 const FormData = require("form-data");
 const stream = require("stream");
 const util = require("util");
+const path = require("path");
 const LocalStorage = require("node-localstorage").LocalStorage;
 const localStorage = new LocalStorage("./scratch");
 
