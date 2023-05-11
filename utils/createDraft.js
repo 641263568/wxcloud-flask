@@ -6,9 +6,10 @@ const access_token = localStorage.getItem("access_token");
 async function createDraft(articles) {
   const url = `http://api.weixin.qq.com/cgi-bin/draft/add?access_token=${access_token}`;
   try {
-    await axios.post(url, {
+    const res = await axios.post(url, {
       articles,
     });
+    console.log(res.data);
     console.log("消息推送成功");
   } catch (error) {
     console.error("Error in createDraft():", error);
