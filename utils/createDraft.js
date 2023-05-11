@@ -1,6 +1,10 @@
 const axios = require("axios");
+const LocalStorage = require("node-localstorage").LocalStorage;
+const localStorage = new LocalStorage("./scratch");
+const access_token = localStorage.getItem("access_token");
+
 async function createDraft(articles) {
-  const url = `http://api.weixin.qq.com/cgi-bin/draft/add`;
+  const url = `http://api.weixin.qq.com/cgi-bin/draft/add?access_token=${access_token}`;
   try {
     await axios.post(url, {
       articles,
