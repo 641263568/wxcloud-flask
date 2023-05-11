@@ -8,7 +8,10 @@ async function getWxCodeToken() {
     let appid, secret;
     // 读取appid和secret
     try {
-      const data = fs.readFileSync("../data.json", "utf-8");
+      // 构建 data.json 文件的路径
+      const parentDir = path.resolve(__dirname, "../");
+      const dataFilePath = path.join(parentDir, "data.json");
+      const data = fs.readFileSync(dataFilePath, "utf-8");
       // 解析 JSON 文件内容
       ({ appid, secret } = JSON.parse(data));
     } catch (err) {
