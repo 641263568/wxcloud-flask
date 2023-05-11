@@ -1,5 +1,6 @@
 // download.js
 const wxapi = require("./wxapi");
+const axios = require("axios");
 const fs = require("fs");
 const FormData = require("form-data");
 const stream = require("stream");
