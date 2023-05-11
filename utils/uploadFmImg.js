@@ -11,7 +11,7 @@ const localStorage = new LocalStorage("./scratch");
 const access_token = localStorage.getItem("access_token");
 
 const pipeline = util.promisify(stream.pipeline);
-const parentDir = path.resolve(__dirname, "../");
+const parentDir = path.resolve(__dirname, "..");
 const imagePath = path.join(parentDir, "image.jpg");
 
 async function download() {

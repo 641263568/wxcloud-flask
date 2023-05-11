@@ -48,5 +48,4 @@ async function getWxCodeToken() {
     return false;
   }
 }
-
-module.exports = getWxCodeToken;
+getWxCodeToken();

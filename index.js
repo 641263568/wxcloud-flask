@@ -1,12 +1,9 @@
 const express = require("express");
 const createDraft = require("./utils/createDraft");
-const getJson = require("./utils/getJson");
 const uploadFmImg = require("./utils/uploadFmImg");
 const getWxCodeToken = require("./utils/getWxCodeToken");
 
 async function init() {
-  // 获取 json
-  getJson();
   // 获取token
   await getWxCodeToken();
 }
