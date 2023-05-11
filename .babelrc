@@ -1,0 +1,6 @@
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    // 添加你需要的Babel插件
+  ]
+}

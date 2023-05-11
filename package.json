@@ -4,12 +4,15 @@
     "description": "call push server",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon index.js"
+        "start": "nodemon index.js",
+        "lint": "eslint ."
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@babel/core": "^7.21.8",
         "@babel/eslint-parser": "^7.21.8",
+        "@babel/preset-env": "^7.21.5",
         "axios": "^1.4.0",
         "babel-eslint": "^10.1.0",
         "eslint": "^8.40.0",
