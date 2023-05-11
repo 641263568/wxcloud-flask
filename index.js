@@ -6,9 +6,9 @@ const getWxCodeToken = require("./utils/getWxCodeToken");
 
 async function init() {
   // 获取 json
-  getJson();
+  // getJson();
   // 获取token
-  await getWxCodeToken();
+  // await getWxCodeToken();
 }
 
 const app = express();
@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.post("/", async (req, res) => {
   await init();
-  console.log("消息推送 ", req.body.Content);
+  console.log("develop分支消息推送 ", req.body.Content);
   try {
     const data = req.body.Content;
     const title = data.split("666666")?.[0]?.trim();

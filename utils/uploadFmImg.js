@@ -1,5 +1,5 @@
 // download.js
-const axios = require("axios");
+const wxapi = require("./wxapi");
 const fs = require("fs");
 const FormData = require("form-data");
 const stream = require("stream");
@@ -27,13 +27,10 @@ async function upload() {
   const url = "http://api.weixin.qq.com/cgi-bin/material/add_material";
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
-  formData.append("access_token", access_token);
   formData.append("type", "image");
 
   try {
-    const response = await axios.post(url, formData, {
-      headers: formData.getHeaders(),
-    });
+    const response = await wxapi.call(url, formData);
 
     if (response.data.errcode) {
       throw new Error(`WeChat API error: ${response.data.errmsg}`);

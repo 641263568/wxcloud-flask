@@ -1,8 +1,10 @@
-const axios = require("axios");
+// Description: 创建图文消息草稿
+const wxapi = require("./wxapi");
+
 async function createDraft(articles) {
   const url = `http://api.weixin.qq.com/cgi-bin/draft/add`;
   try {
-    await axios.post(url, {
+    await wxapi.call(url, {
       articles,
     });
     console.log("消息推送成功");
