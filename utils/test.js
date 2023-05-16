@@ -29,12 +29,13 @@ async function getWxCodeToken() {
       appid, // 请替换为你的 appid
       secret, // 请替换为你的 secret
     };
+    console.log(params);
     const res = await axios.get("http://api.weixin.qq.com/cgi-bin/token", {
       params,
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
-      },
+      // headers: {
+      //   "User-Agent":
+      //     "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
+      // },
     });
 
     const access_token = res.data.access_token;
@@ -49,3 +50,4 @@ async function getWxCodeToken() {
   }
 }
 getWxCodeToken();
+module.exports = getWxCodeToken;

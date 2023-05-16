@@ -45,7 +45,6 @@ async function getWxCodeToken() {
   } catch (err) {
     console.error("获取access_token失败");
     console.error(err);
-
     return false;
   }
 }

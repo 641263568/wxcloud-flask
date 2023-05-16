@@ -3,16 +3,15 @@ const createDraft = require("./utils/createDraft");
 const uploadFmImg = require("./utils/uploadFmImg");
 const getWxCodeToken = require("./utils/getWxCodeToken");
 
-async function init() {
-  // 获取token
-  await getWxCodeToken();
-}
-
 const app = express();
 
 app.use(express.json());
 app.post("/", async (req, res) => {
-  await init();
+  const token = await getWxCodeToken();
+  if (!token) {
+    res.send("获取token失败");
+    return;
+  }
   try {
     const data = req.body.Content;
     const title = data.split("666666")?.[0]?.trim();
