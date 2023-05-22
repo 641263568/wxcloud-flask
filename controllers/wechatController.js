@@ -1,26 +1,12 @@
-const crypto = require("crypto");
 const createDraft = require("../utils/createDraft");
 const uploadFmImg = require("../utils/uploadFmImg");
 const getWxCodeToken = require("../utils/getWxCodeToken");
 
-// 验证Token
-const verifyToken = (req, res) => {
-  const token = "benbenben"; // 你在微信公众号平台上填写的Token
-  const { signature, echostr, timestamp, nonce } = req.query;
-
-  const arr = [token, timestamp, nonce].sort().join("");
-  const sha1Code = crypto.createHash("sha1");
-  const code = sha1Code.update(arr, "utf8").digest("hex");
-
-  if (code === signature) {
-    res.send(echostr);
-  } else {
-    res.send("error");
-  }
-};
-
 // 处理微信消息回调
 const handleCallback = async (req, res) => {
+  const clientIP = req.ip;
+  console.log("请求的IP地址：", clientIP);
+
   const token = await getWxCodeToken();
   if (!token) {
     res.send("获取token失败");
@@ -52,6 +38,5 @@ const handleCallback = async (req, res) => {
 };
 
 module.exports = {
-  verifyToken,
   handleCallback,
 };
