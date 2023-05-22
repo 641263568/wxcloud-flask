@@ -22,8 +22,6 @@ async function download() {
 }
 
 async function upload(token) {
-  // const token =
-  //   "68_ISglNeGOPzcka6AK3WpbWcL7-qRPWD323TUl5iRBPCcUJE8yQR4DYPb4Q0rNsvJKKh9y-GsstGLNdoz5X6JYRI1cs5iHkw-mKSe_g5j1GhbtsDfBfwEarwGXP0MSUYeAJAZBF";
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
   try {
