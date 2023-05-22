@@ -23,13 +23,16 @@ async function download() {
 
 async function upload(token) {
   console.log("token111", token);
-  const url = `http://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${token}`;
+  const url = `http://api.weixin.qq.com/cgi-bin/material/add_material`;
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
   formData.append("type", "image");
 
   try {
     const response = await axios.post(url, formData, {
+      params: {
+        access_token: token,
+      },
       headers: formData.getHeaders(),
     });
 
