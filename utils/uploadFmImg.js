@@ -28,7 +28,7 @@ async function upload(token) {
   formData.append("media", fs.createReadStream(imagePath));
   try {
     const response = await axios.post(
-      `https://api.weixin.qq.com/cgi-bin/media/upload?access_token=${token}&type=image`,
+      `https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${token}&type=image`,
       formData,
       { headers: formData.getHeaders() } // 添加这行代码
     );
