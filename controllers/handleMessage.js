@@ -3,7 +3,7 @@ const uploadFmImg = require("../utils/uploadFmImg");
 const getWxCodeToken = require("../utils/getWxCodeToken");
 
 // 处理微信消息回调
-const handleCallback = async (req, res) => {
+const handleMessage = async (req, res) => {
   const clientIP = req.ip;
   console.log("请求的IP地址：", clientIP);
 
@@ -38,5 +38,5 @@ const handleCallback = async (req, res) => {
 };
 
 module.exports = {
-  handleCallback,
+  handleMessage,
 };
