@@ -5,10 +5,6 @@ const FormData = require("form-data");
 const stream = require("stream");
 const util = require("util");
 const path = require("path");
-const LocalStorage = require("node-localstorage").LocalStorage;
-const localStorage = new LocalStorage("./scratch");
-
-const access_token = localStorage.getItem("access_token");
 
 const pipeline = util.promisify(stream.pipeline);
 const parentDir = path.resolve(__dirname, "..");
@@ -25,11 +21,11 @@ async function download() {
   await pipeline(response.data, writer);
 }
 
-async function upload() {
+async function upload(token) {
   const url = "http://api.weixin.qq.com/cgi-bin/material/add_material";
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
-  formData.append("access_token", access_token);
+  formData.append("access_token", token);
   formData.append("type", "image");
 
   try {
@@ -48,9 +44,9 @@ async function upload() {
   }
 }
 
-async function uploadFmImg() {
+async function uploadFmImg(token) {
   await download();
-  const { media_id } = await upload();
+  const { media_id } = await upload(token);
   return media_id;
 }
 
