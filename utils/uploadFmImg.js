@@ -22,10 +22,9 @@ async function download() {
 }
 
 async function upload(token) {
-  const url = "http://api.weixin.qq.com/cgi-bin/material/add_material";
+  const url = `http://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${token}`;
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
-  formData.append("access_token", token);
   formData.append("type", "image");
 
   try {
