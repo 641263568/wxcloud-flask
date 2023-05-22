@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const { verifyToken } = require("./controllers/verifyToken");
-const { handleCallback } = require("./controllers/handleCallback");
+const { handleMessage } = require("./controllers/handleMessage");
 
 router.get("/", verifyToken);
-router.post("/", handleCallback);
+router.post("/", handleMessage);
 
 module.exports = router;
