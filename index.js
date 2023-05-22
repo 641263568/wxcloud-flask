@@ -52,7 +52,7 @@ app.post("/", async (req, res) => {
         },
       ];
       console.log("推送草稿。。。");
-      await createDraft(params);
+      await createDraft(token, params);
     }
   } catch (error) {
     console.log(error);
