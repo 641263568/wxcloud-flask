@@ -22,34 +22,26 @@ async function download() {
 }
 
 async function upload(token) {
-  console.log("token111", token);
-  const url = `http://api.weixin.qq.com/cgi-bin/material/add_material`;
+  // const token =
+  //   "68_ISglNeGOPzcka6AK3WpbWcL7-qRPWD323TUl5iRBPCcUJE8yQR4DYPb4Q0rNsvJKKh9y-GsstGLNdoz5X6JYRI1cs5iHkw-mKSe_g5j1GhbtsDfBfwEarwGXP0MSUYeAJAZBF";
   const formData = new FormData();
   formData.append("media", fs.createReadStream(imagePath));
-  formData.append("type", "image");
-
   try {
-    const response = await axios.post(url, formData, {
-      params: {
-        access_token: token,
-      },
-      headers: formData.getHeaders(),
-    });
-
-    if (response.data.errcode) {
-      throw new Error(`WeChat API error: ${response.data.errmsg}`);
-    }
-    return response.data;
+    const response = await axios.post(
+      `https://api.weixin.qq.com/cgi-bin/media/upload?access_token=${token}&type=image`,
+      formData,
+      { headers: formData.getHeaders() } // 添加这行代码
+    );
+    return response.data; // 返回响应的数据
   } catch (error) {
-    // Handle the error
-    console.error("Error in upload():", error);
-    throw error; // Re-throw the error to propagate it to the caller
+    console.log(error);
   }
 }
 
 async function uploadFmImg(token) {
   await download();
   const { media_id } = await upload(token);
+  console.log("上传封面成功", media_id);
   return media_id;
 }
 

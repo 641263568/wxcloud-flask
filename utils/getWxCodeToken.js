@@ -29,7 +29,7 @@ async function getWxCodeToken() {
       appid, // 请替换为你的 appid
       secret, // 请替换为你的 secret
     };
-    const res = await axios.get("http://api.weixin.qq.com/cgi-bin/token", {
+    const res = await axios.get("https://api.weixin.qq.com/cgi-bin/token", {
       params,
       // headers: {
       //   "User-Agent":
