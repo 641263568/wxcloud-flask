@@ -3,7 +3,7 @@ const uploadFmImg = require("../utils/uploadFmImg");
 const getWxCodeToken = require("../utils/getWxCodeToken");
 
 // 处理微信消息回调
-const handleMessage = async (req, res) => {
+const handleGzhMessage = async (req, res) => {
   const clientIP = req.ip;
   console.log("请求的req：", req.originalUrl);
   console.log("Object.keys", Object.keys(req));
@@ -14,6 +14,7 @@ const handleMessage = async (req, res) => {
     res.send("获取token失败");
     return;
   }
+  // 为什么要先响应：微信服务器会在5秒内收到响应，才会认为你已经收到了消息，不会再次发送
   res.send("先返回再处理");
   try {
     const data = req.body?.xml?.content?.[0];
@@ -40,5 +41,5 @@ const handleMessage = async (req, res) => {
 };
 
 module.exports = {
-  handleMessage,
+  handleGzhMessage,
 };
