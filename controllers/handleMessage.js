@@ -6,6 +6,7 @@ const getWxCodeToken = require("../utils/getWxCodeToken");
 const handleMessage = async (req, res) => {
   const clientIP = req.ip;
   console.log("请求的req：", req.originalUrl);
+  console.log("Object.keys", Object.keys(req));
   console.log("请求的IP地址：", clientIP);
 
   const token = await getWxCodeToken();
@@ -13,6 +14,7 @@ const handleMessage = async (req, res) => {
     res.send("获取token失败");
     return;
   }
+  res.send("先返回再处理");
   try {
     const data = req.body?.xml?.content?.[0];
     const title = data.split("666666")?.[0]?.trim();
@@ -31,13 +33,9 @@ const handleMessage = async (req, res) => {
       ];
       console.log("推送草稿。。。");
       await createDraft(token, params);
-      res.send("success");
-    } else {
-      res.send("不是要发公众号的消息");
     }
   } catch (error) {
     console.log(error);
-    res.send("error");
   }
 };
 
