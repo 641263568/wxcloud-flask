@@ -6,7 +6,7 @@ const getWxCodeToken = require("../utils/getWxCodeToken");
 const handleMessage = async (req, res) => {
   const clientIP = req.ip;
 
-  console.log("请求的req：", req);
+  console.log("请求的req：", Object.keys(req));
   console.log("请求的IP地址：", clientIP);
 
   const token = await getWxCodeToken();
@@ -32,6 +32,7 @@ const handleMessage = async (req, res) => {
       ];
       console.log("推送草稿。。。");
       await createDraft(token, params);
+      res;
     }
   } catch (error) {
     console.log(error);

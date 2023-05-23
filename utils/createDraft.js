@@ -7,6 +7,7 @@ async function createDraft(token, articles) {
       articles,
     });
     console.log("消息推送成功");
+    return true;
   } catch (error) {
     console.error("Error in createDraft():", error);
     throw error;
