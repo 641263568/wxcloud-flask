@@ -13,6 +13,4 @@ async function createDraft(token, articles) {
   }
 }
 
-createDraft();
-
 module.exports = createDraft;
