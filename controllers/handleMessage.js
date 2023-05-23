@@ -31,12 +31,14 @@ const handleMessage = async (req, res) => {
       ];
       console.log("推送草稿。。。");
       await createDraft(token, params);
-      res;
+      res.send("success");
+    } else {
+      res.send("不是要发公众号的消息");
     }
   } catch (error) {
     console.log(error);
+    res.send("error");
   }
-  res.send("success");
 };
 
 module.exports = {
