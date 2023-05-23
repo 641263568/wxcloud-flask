@@ -5,8 +5,7 @@ const getWxCodeToken = require("../utils/getWxCodeToken");
 // 处理微信消息回调
 const handleMessage = async (req, res) => {
   const clientIP = req.ip;
-
-  console.log("请求的req：", Object.keys(req));
+  console.log("请求的req：", req.originalUrl);
   console.log("请求的IP地址：", clientIP);
 
   const token = await getWxCodeToken();
