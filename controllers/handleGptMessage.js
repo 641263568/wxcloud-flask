@@ -1,8 +1,11 @@
 const { Configuration, OpenAIApi } = require("openai");
+const { HttpProxyAgent } = require("http-proxy-agent");
+
+const proxy = "https://relay1.ksrd.xyz:2083";
 
 const configuration = new Configuration({
-  // apiKey: process.env.OPENAI_API_KEY,
   apiKey: "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",
+  agent: new HttpProxyAgent(proxy),
 });
 const openai = new OpenAIApi(configuration);
 
