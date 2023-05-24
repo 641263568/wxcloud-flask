@@ -1,25 +1,35 @@
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  // apiKey: process.env.OPENAI_API_KEY,
+  apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 
 // 处理GPT消息回调
 const handleGptMessage = async (req, res) => {
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt:
-      'I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with "Unknown".\n\nQ: What is human life expectancy in the United States?\nA: Human life expectancy in the United States is 78 years.\n\nQ: Who was president of the United States in 1955?\nA: Dwight D. Eisenhower was president of the United States in 1955.\n\nQ: Which party did he belong to?\nA: He belonged to the Republican Party.\n\nQ: What is the square root of banana?\nA: Unknown\n\nQ: How does a telescope work?\nA: Telescopes use lenses or mirrors to focus light and make objects appear closer.\n\nQ: Where were the 1992 Olympics held?\nA: The 1992 Olympics were held in Barcelona, Spain.\n\nQ: How many squigs are in a bonk?\nA: Unknown\n\nQ: Where is the Valley of Kings?\nA:',
-    temperature: 0,
-    max_tokens: 100,
-    top_p: 1,
-    frequency_penalty: 0.0,
-    presence_penalty: 0.0,
-    stop: ["\n"],
-  });
-  console.log(response);
-  res.json(response);
+  console.log("123handleGptMessage...");
+  const response = await openai.createCompletion(
+    {
+      model: "gpt-3.5-turbo",
+      prompt: "How are you today?",
+      message: [
+        {
+          role: "user",
+          content: "I am fine, thank you. And you?",
+        },
+      ],
+      // temperature: 0,
+      // max_tokens: 100,
+      // top_p: 1,
+      // frequency_penalty: 0.0,
+      // presence_penalty: 0.0,
+      // stop: ["\n"],
+    }
+    // { timeout: 5000 }
+  );
+  console.log(response.data.choices[0]);
+  res.json(response.data.choices[0]);
 };
 
 module.exports = {
