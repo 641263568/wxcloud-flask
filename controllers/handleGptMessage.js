@@ -1,38 +1,38 @@
-const { Configuration, OpenAIApi } = require("openai");
-const { HttpProxyAgent } = require("http-proxy-agent");
+const axios = require("axios");
+const { HttpsProxyAgent } = require("https-proxy-agent");
+const { PassThrough } = require("stream");
 
-const proxy = "https://relay1.ksrd.xyz:2083";
+const proxyAgent = new HttpsProxyAgent("http://127.0.0.1:7890");
 
-const configuration = new Configuration({
-  apiKey: "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",
-  agent: new HttpProxyAgent(proxy),
-});
-const openai = new OpenAIApi(configuration);
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: "Bearer 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",
+};
 
-// 处理GPT消息回调
 const handleGptMessage = async (req, res) => {
-  console.log("123handleGptMessage...");
-  const response = await openai.createCompletion(
-    {
-      model: "gpt-3.5-turbo",
-      prompt: "How are you today?",
-      message: [
-        {
-          role: "user",
-          content: "I am fine, thank you. And you?",
-        },
-      ],
-      // temperature: 0,
-      // max_tokens: 100,
-      // top_p: 1,
-      // frequency_penalty: 0.0,
-      // presence_penalty: 0.0,
-      // stop: ["\n"],
-    }
-    // { timeout: 5000 }
-  );
-  console.log(response.data.choices[0]);
-  res.json(response.data.choices[0]);
+  const { content } = req.body;
+  const data = {
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content }], // You might want to replace "Hello world" with actual user input
+  };
+
+  try {
+    const axiosStream = await axios({
+      url: "https://api.openai.com/v1/chat/completions",
+      method: "POST",
+      headers: headers,
+      data: data,
+      httpsAgent: proxyAgent,
+      responseType: "stream",
+    });
+
+    const passThrough = new PassThrough();
+    axiosStream.data.pipe(passThrough);
+    res.setHeader("Content-Type", "application/json");
+    passThrough.pipe(res);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 module.exports = {
